@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 import {
   Home,
   Heart,
@@ -10,6 +11,7 @@ import {
   Users,
   Monitor,
   Scale,
+  ArrowRight,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,36 +20,42 @@ const SERVICES = [
   {
     icon: Home,
     title: "Občanské právo",
+    slug: "obcanske-pravo",
     description:
       "Sepisování smluv, převody nemovitostí, vymáhání pohledávek, zastoupení v exekučním řízení.",
   },
   {
     icon: Heart,
     title: "Rodinné právo",
+    slug: "rodinne-pravo",
     description:
       "Rozvody, výživné, péče o děti, vypořádání společného jmění manželů, úprava styku s dětmi.",
   },
   {
     icon: Briefcase,
     title: "Obchodní právo",
+    slug: "obchodni-pravo",
     description:
       "Zakládání a správa společností, obchodní smlouvy, vymáhání pohledávek, korporátní právo.",
   },
   {
     icon: Users,
     title: "Pracovní právo",
+    slug: "pracovni-pravo",
     description:
       "Pracovní smlouvy, výpovědi, odstupné, pracovní úrazy, zastoupení zaměstnanců i zaměstnavatelů.",
   },
   {
     icon: Scale,
     title: "Ostatní služby",
+    slug: "dalsi-sluzby",
     description:
       "Správní právo, zastoupení před soudy, právní rozbory a poradenství v dalších právních oblastech.",
   },
   {
     icon: Monitor,
     title: "On-line konzultace",
+    slug: "online-konzultace",
     description:
       "Právní poradenství na dálku — videokonference, telefonická konzultace, e-mailová komunikace.",
   },
@@ -131,8 +139,9 @@ export function Services() {
           {SERVICES.map((service) => {
             const Icon = service.icon;
             return (
-              <div
+              <Link
                 key={service.title}
+                href={`/sluzby/${service.slug}`}
                 className="service-card group cursor-pointer rounded-xl border border-gray-light bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5 sm:rounded-2xl sm:p-8"
               >
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-navy/5 transition-colors duration-500 group-hover:bg-gold/10">
@@ -144,8 +153,11 @@ export function Services() {
                 <p className="text-sm leading-relaxed text-gray-text">
                   {service.description}
                 </p>
-                <div className="mt-6 h-px w-0 bg-gold transition-all duration-700 group-hover:w-full" />
-              </div>
+                <div className="mt-6 flex items-center justify-between">
+                  <div className="h-px w-0 bg-gold transition-all duration-700 group-hover:w-3/4" />
+                  <ArrowRight className="h-4 w-4 text-gold opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100" />
+                </div>
+              </Link>
             );
           })}
         </div>

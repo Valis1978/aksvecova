@@ -3,22 +3,26 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Scale } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = [
-  { href: "#sluzby", label: "Právní služby" },
-  { href: "#o-mne", label: "O mně" },
-  { href: "#proces", label: "Spolupráce" },
-  { href: "#odmena", label: "Odměna" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/#sluzby", label: "Právní služby" },
+  { href: "/#o-mne", label: "O mně" },
+  { href: "/#proces", label: "Spolupráce" },
+  { href: "/#odmena", label: "Odměna" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 export function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,17 +44,22 @@ export function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (isHome) {
+      const hash = href.replace("/", "");
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
     }
+    window.location.href = href;
   };
 
   return (
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+        isScrolled || !isHome
           ? "bg-white/95 backdrop-blur-md shadow-sm"
           : "bg-gradient-to-b from-navy/30 to-transparent"
       }`}
@@ -58,23 +67,25 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between sm:h-20">
           {/* Logo */}
-          <a
-            href="#"
+          <Link
+            href="/"
             onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              if (isHome) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
             }}
             className="flex items-center gap-3"
           >
             <Scale
               className={`h-6 w-6 transition-colors duration-500 ${
-                isScrolled ? "text-gold" : "text-white"
+                isScrolled || !isHome ? "text-gold" : "text-white"
               }`}
             />
             <div className="flex flex-col">
               <span
                 className={`font-heading text-lg font-semibold tracking-wide transition-colors duration-500 ${
-                  isScrolled ? "text-navy" : "text-white"
+                  isScrolled || !isHome ? "text-navy" : "text-white"
                 }`}
               >
                 JUDr. Švecová
@@ -87,7 +98,7 @@ export function Navbar() {
                 Advokátní kancelář
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden items-center gap-8 lg:flex">
@@ -96,7 +107,7 @@ export function Navbar() {
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
                 className={`nav-link text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
-                  isScrolled
+                  isScrolled || !isHome
                     ? "text-navy/70 hover:text-navy"
                     : "text-white/80 hover:text-white"
                 }`}
@@ -105,7 +116,7 @@ export function Navbar() {
               </button>
             ))}
             <button
-              onClick={() => handleNavClick("#kontakt")}
+              onClick={() => handleNavClick("/#kontakt")}
               className="rounded-full border border-gold bg-transparent px-6 py-2.5 text-xs uppercase tracking-[0.15em] text-gold transition-all duration-300 hover:bg-gold hover:text-white"
             >
               Nezávazná konzultace
@@ -116,7 +127,7 @@ export function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`lg:hidden transition-colors duration-500 ${
-              isScrolled ? "text-navy" : "text-white"
+              isScrolled || !isHome ? "text-navy" : "text-white"
             }`}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -141,7 +152,7 @@ export function Navbar() {
             </button>
           ))}
           <button
-            onClick={() => handleNavClick("#kontakt")}
+            onClick={() => handleNavClick("/#kontakt")}
             className="mt-2 rounded-full border border-gold bg-gold px-6 py-3 text-center text-xs uppercase tracking-[0.15em] text-white"
           >
             Nezávazná konzultace

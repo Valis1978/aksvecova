@@ -22,16 +22,16 @@ export function Footer() {
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs uppercase tracking-[0.15em] text-white/40 sm:gap-x-6">
-            <a href="#sluzby" className="transition-colors hover:text-white/70">
+            <a href="/#sluzby" className="transition-colors hover:text-white/70">
               Právní služby
             </a>
-            <a href="#o-mne" className="transition-colors hover:text-white/70">
+            <a href="/#o-mne" className="transition-colors hover:text-white/70">
               O mně
             </a>
-            <a href="#odmena" className="transition-colors hover:text-white/70">
+            <a href="/#odmena" className="transition-colors hover:text-white/70">
               Odměna
             </a>
-            <a href="#kontakt" className="transition-colors hover:text-white/70">
+            <a href="/#kontakt" className="transition-colors hover:text-white/70">
               Kontakt
             </a>
             <a href="/gdpr" className="transition-colors hover:text-white/70">

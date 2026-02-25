@@ -139,13 +139,23 @@ export function About() {
               zkušeného advokáta jsem v roce 2013 složila advokátní zkoušky. Od
               roku 2017 působím jako samostatná advokátka v Brně.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-gray-text">
-              Jsem řádnou členkou{" "}
-              <span className="font-medium text-navy">
-                Unie rodinných advokátů
-              </span>
-              .
-            </p>
+            <div className="mt-6 flex items-center gap-4 rounded-xl border border-gold/20 bg-gold/5 p-4 sm:gap-5 sm:p-5">
+              <Image
+                src="/images/ura-logo-full.png"
+                alt="Logo Unie rodinných advokátů"
+                width={80}
+                height={48}
+                className="flex-shrink-0"
+              />
+              <p className="text-sm leading-relaxed text-gray-text sm:text-base">
+                Jsem řádnou členkou{" "}
+                <span className="font-medium text-navy">
+                  Unie rodinných advokátů
+                </span>
+                , profesního spolku sdružujícího advokáty specializující se na
+                rodinné právo.
+              </p>
+            </div>
 
             {/* Stats */}
             <div
