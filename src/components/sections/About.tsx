@@ -90,7 +90,7 @@ export function About() {
     <section
       ref={sectionRef}
       id="o-mne"
-      className="relative bg-white py-16 sm:py-24 lg:py-32"
+      className="relative bg-white py-16 sm:py-24 lg:py-32 grain-overlay"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 sm:gap-16 lg:grid-cols-2 lg:gap-20">

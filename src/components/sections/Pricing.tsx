@@ -97,7 +97,7 @@ export function Pricing() {
     <section
       ref={sectionRef}
       id="odmena"
-      className="relative bg-ivory py-24 lg:py-32"
+      className="relative bg-ivory py-24 lg:py-32 grain-overlay"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Heading */}
@@ -117,7 +117,7 @@ export function Pricing() {
 
         {/* Hourly Rate — Hero Block */}
         <div ref={cardsRef}>
-          <div className="pricing-card mx-auto mb-8 max-w-2xl rounded-xl border border-gray-light bg-white p-6 text-center transition-all duration-500 hover:-translate-y-1 sm:mb-12 sm:rounded-2xl sm:p-8 md:p-10">
+          <div className="pricing-card card-shine mx-auto mb-8 max-w-2xl rounded-xl border border-gray-light bg-white p-6 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-gold/5 sm:mb-12 sm:rounded-2xl sm:p-8 md:p-10">
             <h3 className="font-heading text-2xl font-medium text-navy">
               Hodinová sazba
             </h3>
@@ -150,10 +150,10 @@ export function Pricing() {
             {PLANS.map((plan) => (
               <div
                 key={plan.name}
-                className={`pricing-card relative rounded-xl p-5 transition-all duration-500 hover:-translate-y-1 sm:rounded-2xl sm:p-6 ${
+                className={`pricing-card card-shine relative rounded-xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-lg sm:rounded-2xl sm:p-6 ${
                   plan.highlighted
                     ? "border-2 border-gold bg-white shadow-xl shadow-gold/10"
-                    : "border border-gray-light bg-white"
+                    : "border border-gray-light bg-white hover:shadow-gold/5"
                 }`}
               >
                 {plan.highlighted && (

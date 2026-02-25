@@ -117,9 +117,13 @@ export function Services() {
     <section
       ref={sectionRef}
       id="sluzby"
-      className="relative bg-ivory py-16 sm:py-24 lg:py-32"
+      className="relative bg-ivory py-16 sm:py-24 lg:py-32 grain-overlay"
     >
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+      {/* Decorative background elements */}
+      <div className="absolute top-20 right-10 w-64 h-64 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-navy/3 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Heading */}
         <div ref={headingRef} className="mb-10 max-w-2xl sm:mb-16">
           <p className="mb-3 text-[10px] uppercase tracking-[0.3em] text-gold sm:mb-4 sm:text-xs">
@@ -142,7 +146,7 @@ export function Services() {
               <Link
                 key={service.title}
                 href={`/sluzby/${service.slug}`}
-                className="service-card group cursor-pointer rounded-xl border border-gray-light bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5 sm:rounded-2xl sm:p-8"
+                className="service-card card-shine group cursor-pointer rounded-xl border border-gray-light bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5 sm:rounded-2xl sm:p-8"
               >
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-navy/5 transition-colors duration-500 group-hover:bg-gold/10">
                   <Icon className="h-5 w-5 text-navy/60 transition-colors duration-500 group-hover:text-gold" />
@@ -161,7 +165,7 @@ export function Services() {
             );
           })}
         </div>
-      </div>
+        </div>
     </section>
   );
 }
