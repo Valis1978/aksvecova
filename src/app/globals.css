@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ivory: #FAFAF8;
+  --color-navy: #0A1628;
+  --color-navy-light: #162035;
+  --color-gold: #C4A265;
+  --color-gold-light: #D4B87A;
+  --color-gold-dark: #A8894F;
+  --color-gray-text: #6B7280;
+  --color-gray-light: #E5E7EB;
+  --color-white: #FFFFFF;
+
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-inter);
+}
+
+/* ========== BASE RESET ========== */
+
+html {
+  scroll-behavior: initial; /* Lenis handles smooth scroll */
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-navy);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== TYPOGRAPHY ========== */
+
+.font-heading {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* ========== GOLD GRADIENT TEXT ========== */
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 50%, var(--color-gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== REVEAL ANIMATIONS ========== */
+
+.reveal-line {
+  clip-path: inset(0 100% 0 0);
+}
+
+.reveal-line.active {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ========== IMAGE REVEAL ========== */
+
+.img-reveal {
+  clip-path: inset(100% 0 0 0);
+}
+
+.img-reveal.active {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* ========== GOLD SEPARATOR LINE ========== */
+
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* ========== SCROLL PROGRESS BAR ========== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* ========== NAVBAR ========== */
+
+.nav-link {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ========== FORM STYLES ========== */
+
+.form-input {
+  width: 100%;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-gray-light);
+  color: var(--color-navy);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-bottom-color: var(--color-gold);
+}
+
+.form-input::placeholder {
+  color: var(--color-gray-text);
+}
+
+.form-label {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  font-size: 1rem;
+  color: var(--color-gray-text);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label {
+  top: -0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ========== WIZARD STEP CARD ========== */
+
+.wizard-card {
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: var(--color-white);
+}
+
+.wizard-card:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(196, 162, 101, 0.1);
+}
+
+.wizard-card.selected {
+  border-color: var(--color-gold);
+  background: linear-gradient(135deg, rgba(196, 162, 101, 0.05) 0%, rgba(196, 162, 101, 0.02) 100%);
+  box-shadow: 0 0 0 1px var(--color-gold);
+}
+
+/* ========== CUSTOM SCROLLBAR ========== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-dark);
+}
+
+/* ========== SELECTION ========== */
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-white);
+}
