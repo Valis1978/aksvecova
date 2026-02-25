@@ -149,11 +149,21 @@ export function Hero() {
         className="absolute inset-0"
         style={{ clipPath: "inset(100% 0 0 0)" }}
       >
+        {/* Desktop: wide landscape banner */}
         <Image
           src="/images/hero-banner.jpg"
           alt="JUDr. Michaela Švecová"
           fill
-          className="object-cover object-[center_20%]"
+          className="hidden object-cover object-[center_20%] lg:block"
+          priority
+          sizes="100vw"
+        />
+        {/* Mobile & Tablet: portrait photo — face visible */}
+        <Image
+          src="/images/portrait-svecova.png"
+          alt="JUDr. Michaela Švecová"
+          fill
+          className="object-cover object-top lg:hidden"
           priority
           sizes="100vw"
         />
@@ -169,8 +179,8 @@ export function Hero() {
       {/* Top gradient — ensures navbar text readability */}
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-navy/70 via-navy/30 to-transparent z-[1]" />
 
-      {/* Gradient Overlay — bottom fade */}
-      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
+      {/* Gradient Overlay — bottom fade (stronger on mobile for portrait photo readability) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-navy/10 lg:from-navy lg:via-navy/20 lg:to-transparent" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8">
