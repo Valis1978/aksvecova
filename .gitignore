@@ -50,8 +50,9 @@ public/images/obcanske-pravo.jpg
 public/images/obchodni-pravo.jpg
 public/images/online-sluzby.jpg
 public/images/ostatni-sluzby.jpg
-public/images/portrait-svecova-full.png
-public/images/portrait-svecova.png
 public/images/pracovni-pravo.jpg
 public/images/rodinne-pravo.jpg
 public/images/ura-logo.jpg
+
+# upscale backups (originals before upscaling)
+public/images/*-original.*
