@@ -289,6 +289,21 @@ body {
   animation: float 4s ease-in-out infinite;
 }
 
+/* ========== CUSTOM CURSOR ========== */
+
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none !important;
+}
+
+.cursor-grow {
+  width: 52px !important;
+  height: 52px !important;
+  margin-left: -8px;
+  margin-top: -8px;
+  border-color: rgba(196, 162, 101, 0.6) !important;
+}
+
 /* ========== SELECTION ========== */
 
 ::selection {

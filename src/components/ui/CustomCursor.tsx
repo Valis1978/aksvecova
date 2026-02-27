@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Custom cursor with mix-blend-mode: difference.
  * AK Švecová — gold inner dot (#C4A265), white outer ring.
- * Hidden on touch devices.
+ * Hidden on touch devices. CSS in globals.css.
  */
 export default function CustomCursor() {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -13,40 +13,48 @@ export default function CustomCursor() {
   const mouse = useRef({ x: 0, y: 0 });
   const outerPos = useRef({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
-  const [visible, setVisible] = useState(false);
+  const visibleRef = useRef(false);
 
   useEffect(() => {
-    // Skip on touch devices
     if (typeof window === 'undefined') return;
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
 
+    const show = () => {
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        if (outerRef.current) outerRef.current.style.opacity = '1';
+        if (innerRef.current) innerRef.current.style.opacity = '1';
+      }
+    };
+
+    const hide = () => {
+      visibleRef.current = false;
+      if (outerRef.current) outerRef.current.style.opacity = '0';
+      if (innerRef.current) innerRef.current.style.opacity = '0';
+    };
+
     const handleMove = (e: MouseEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY };
-      if (!visible) setVisible(true);
-
-      // Inner dot — instant
+      show();
       if (innerRef.current) {
         innerRef.current.style.transform = `translate(${e.clientX - 2}px, ${e.clientY - 2}px)`;
       }
     };
 
-    const handleLeave = () => setVisible(false);
-    const handleEnter = () => setVisible(true);
-
-    // Grow on interactive elements
     const handleOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [data-magnetic], input, textarea, select, [role="button"]')) {
         outerRef.current?.classList.add('cursor-grow');
       }
     };
+
     const handleOut = () => {
       outerRef.current?.classList.remove('cursor-grow');
     };
 
     document.addEventListener('mousemove', handleMove);
-    document.addEventListener('mouseleave', handleLeave);
-    document.addEventListener('mouseenter', handleEnter);
+    document.addEventListener('mouseleave', hide);
+    document.addEventListener('mouseenter', show);
     document.addEventListener('mouseover', handleOver);
     document.addEventListener('mouseout', handleOut);
 
@@ -65,16 +73,15 @@ export default function CustomCursor() {
     return () => {
       cancelAnimationFrame(rafRef.current);
       document.removeEventListener('mousemove', handleMove);
-      document.removeEventListener('mouseleave', handleLeave);
-      document.removeEventListener('mouseenter', handleEnter);
+      document.removeEventListener('mouseleave', hide);
+      document.removeEventListener('mouseenter', show);
       document.removeEventListener('mouseover', handleOver);
       document.removeEventListener('mouseout', handleOut);
     };
-  }, [visible]);
+  }, []);
 
   return (
     <>
-      {/* Outer ring */}
       <div
         ref={outerRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
@@ -83,12 +90,11 @@ export default function CustomCursor() {
           height: 36,
           borderRadius: '50%',
           border: '1.5px solid white',
-          opacity: visible ? 1 : 0,
+          opacity: 0,
           transition: 'opacity 0.3s, width 0.3s, height 0.3s, border-color 0.3s',
           willChange: 'transform',
         }}
       />
-      {/* Inner dot */}
       <div
         ref={innerRef}
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
@@ -97,23 +103,11 @@ export default function CustomCursor() {
           height: 4,
           borderRadius: '50%',
           backgroundColor: '#C4A265',
-          opacity: visible ? 1 : 0,
+          opacity: 0,
           transition: 'opacity 0.3s',
           willChange: 'transform',
         }}
       />
-      <style jsx global>{`
-        .custom-cursor-active, .custom-cursor-active * {
-          cursor: none !important;
-        }
-        .cursor-grow {
-          width: 52px !important;
-          height: 52px !important;
-          margin-left: -8px;
-          margin-top: -8px;
-          border-color: rgba(196, 162, 101, 0.6) !important;
-        }
-      `}</style>
     </>
   );
 }
