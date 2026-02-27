@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Cormorant_Garamond } from "next/font/google";
 import { LenisProvider } from "@/components/providers/LenisProvider";
+import { ClientEffects } from "@/components/providers/ClientEffects";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -71,8 +72,9 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body
-        className={`${inter.variable} ${cormorant.variable} font-body antialiased`}
+        className={`${inter.variable} ${cormorant.variable} font-body antialiased custom-cursor-active`}
       >
+        <ClientEffects />
         <LenisProvider>
           <ScrollProgress />
           <Navbar />

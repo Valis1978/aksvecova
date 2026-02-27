@@ -13,6 +13,7 @@ import {
   Scale,
   ArrowRight,
 } from "lucide-react";
+import { useClipReveal } from "@/hooks/useClipReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,6 +66,7 @@ export function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const gridClipRef = useClipReveal<HTMLDivElement>({ direction: 'bottom', duration: 1, ease: 'power3.inOut' });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -135,7 +137,8 @@ export function Services() {
           <div className="mt-4 h-px w-12 bg-gold sm:mt-6 sm:w-16" />
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid with clip-path reveal */}
+        <div ref={gridClipRef}>
         <div
           ref={cardsRef}
           className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3"
@@ -164,6 +167,7 @@ export function Services() {
               </Link>
             );
           })}
+        </div>
         </div>
         </div>
     </section>

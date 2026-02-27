@@ -5,6 +5,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { Award, BookOpen, Users, Calendar } from "lucide-react";
+import { useClipReveal } from "@/hooks/useClipReveal";
+import { useSplitTextReveal } from "@/hooks/useSplitTextReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +22,8 @@ export function About() {
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const imageClipRef = useClipReveal<HTMLDivElement>({ direction: 'left', duration: 1.2, ease: 'power3.inOut' });
+  const titleRef = useSplitTextReveal<HTMLHeadingElement>({ type: 'chars', stagger: 0.03, y: 30 });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -94,8 +98,8 @@ export function About() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 sm:gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* Image Column */}
-          <div className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+          {/* Image Column with clip-path reveal */}
+          <div ref={imageClipRef} className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
             <div
               ref={imageWrapperRef}
               className="relative aspect-[3/4] w-full max-h-[450px] overflow-hidden rounded-xl sm:max-h-[600px] sm:rounded-2xl"
@@ -119,7 +123,7 @@ export function About() {
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-gold">
               O mně
             </p>
-            <h2 className="font-heading text-4xl font-light text-navy md:text-5xl">
+            <h2 ref={titleRef} className="font-heading text-4xl font-light text-navy md:text-5xl">
               JUDr. Michaela Švecová
             </h2>
             <div className="mt-6 h-px w-16 bg-gold" />

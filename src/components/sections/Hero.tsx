@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
+import MagnetButton from "@/components/ui/MagnetButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -229,7 +230,7 @@ export function Hero() {
             className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:gap-4"
             style={{ opacity: 0 }}
           >
-            <button
+            <MagnetButton
               onClick={() => {
                 const el = document.querySelector("#kontakt");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -237,8 +238,8 @@ export function Hero() {
               className="group relative overflow-hidden rounded-full bg-gold px-6 py-3.5 text-xs uppercase tracking-[0.15em] text-white transition-all duration-500 hover:bg-gold-dark sm:px-8 sm:py-4 sm:text-sm"
             >
               <span className="relative z-10">Nezávazná konzultace</span>
-            </button>
-            <button
+            </MagnetButton>
+            <MagnetButton
               onClick={() => {
                 const el = document.querySelector("#sluzby");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -246,7 +247,7 @@ export function Hero() {
               className="rounded-full border border-white/30 px-6 py-3.5 text-xs uppercase tracking-[0.15em] text-white/80 transition-all duration-300 hover:border-white/60 hover:text-white sm:px-8 sm:py-4 sm:text-sm"
             >
               Právní služby
-            </button>
+            </MagnetButton>
           </div>
         </div>
       </div>

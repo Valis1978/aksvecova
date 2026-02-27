@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Check, Star } from "lucide-react";
+import { useTiltCard } from "@/hooks/useTiltCard";
+import MagnetButton from "@/components/ui/MagnetButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,6 +51,7 @@ export function Pricing() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const hourlyTiltRef = useTiltCard<HTMLDivElement>({ glowColor: 'rgba(196, 162, 101, 0.08)' });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -117,7 +120,7 @@ export function Pricing() {
 
         {/* Hourly Rate — Hero Block */}
         <div ref={cardsRef}>
-          <div className="pricing-card card-shine mx-auto mb-8 max-w-2xl rounded-xl border border-gray-light bg-white p-6 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-gold/5 sm:mb-12 sm:rounded-2xl sm:p-8 md:p-10">
+          <div ref={hourlyTiltRef} className="pricing-card card-shine mx-auto mb-8 max-w-2xl rounded-xl border border-gray-light bg-white p-6 text-center transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-gold/5 sm:mb-12 sm:rounded-2xl sm:p-8 md:p-10">
             <h3 className="font-heading text-2xl font-medium text-navy">
               Hodinová sazba
             </h3>
@@ -130,7 +133,7 @@ export function Pricing() {
             <p className="mx-auto max-w-md text-sm leading-relaxed text-gray-text">
               {HOURLY.description}
             </p>
-            <button
+            <MagnetButton
               onClick={() => {
                 const el = document.querySelector("#kontakt");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -138,7 +141,7 @@ export function Pricing() {
               className="mt-6 rounded-full border border-navy/20 px-8 py-3 text-sm uppercase tracking-[0.1em] text-navy transition-all duration-300 hover:border-gold hover:text-gold"
             >
               Nezávazná konzultace
-            </button>
+            </MagnetButton>
           </div>
 
           {/* Paušální balíčky */}
@@ -201,7 +204,7 @@ export function Pricing() {
                   </li>
                 </ul>
 
-                <button
+                <MagnetButton
                   onClick={() => {
                     const el = document.querySelector("#kontakt");
                     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -213,7 +216,7 @@ export function Pricing() {
                   }`}
                 >
                   Mám zájem
-                </button>
+                </MagnetButton>
               </div>
             ))}
           </div>
