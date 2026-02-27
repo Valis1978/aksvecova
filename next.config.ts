@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "standalone",
+  images: {
+    // Serve images directly — avoids /_next/image 400 errors on Coolify/Docker
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
