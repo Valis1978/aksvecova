@@ -72,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body
-        className={`${inter.variable} ${cormorant.variable} font-body antialiased custom-cursor-active`}
+        className={`${inter.variable} ${cormorant.variable} font-body antialiased`}
       >
         <ClientEffects />
         <LenisProvider>

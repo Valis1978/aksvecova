@@ -17,7 +17,13 @@ export default function CustomCursor() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+    // Use pointer: fine to detect mouse — maxTouchPoints > 0 is true on
+    // Windows laptops with touchscreen even when using a mouse
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (!hasFinePointer) return;
+
+    // Hide default cursor only when custom cursor is active
+    document.body.classList.add('custom-cursor-active');
 
     const show = () => {
       if (!visibleRef.current) {
@@ -72,6 +78,7 @@ export default function CustomCursor() {
 
     return () => {
       cancelAnimationFrame(rafRef.current);
+      document.body.classList.remove('custom-cursor-active');
       document.removeEventListener('mousemove', handleMove);
       document.removeEventListener('mouseleave', hide);
       document.removeEventListener('mouseenter', show);
