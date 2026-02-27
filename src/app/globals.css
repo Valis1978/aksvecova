@@ -296,12 +296,12 @@ body {
   cursor: none !important;
 }
 
-.cursor-grow {
-  width: 52px !important;
-  height: 52px !important;
-  margin-left: -8px;
-  margin-top: -8px;
-  border-color: rgba(196, 162, 101, 0.6) !important;
+.cursor-hover {
+  width: 14px !important;
+  height: 14px !important;
+  top: -7px !important;
+  left: -7px !important;
+  box-shadow: 0 0 12px rgba(196, 162, 101, 0.5), 0 0 30px rgba(196, 162, 101, 0.2) !important;
 }
 
 /* ========== SELECTION ========== */
